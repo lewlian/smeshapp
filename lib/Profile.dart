@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smeshapp/eventDialog.dart';
 import './EditProfilePage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:random_color/random_color.dart';
@@ -172,7 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     }
 
-    Row buildImageViewButtonBar() {
+    Row buildViewToggleBar() {
       Color isActiveButtonColor(String viewName) {
         if (_view == viewName) {
           return Colors.blueAccent;
@@ -257,13 +258,20 @@ class _ProfilePageState extends State<ProfilePage> {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                       height: 100,
-                      child: Card(
-                          color: r.randomColor(),
-                          child: Center(
-                            child: Text(events[index],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 24)),
-                          )));
+                      child: GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) => EventDialog());
+                        },
+                        child: Card(
+                            color: r.randomColor(),
+                            child: Center(
+                              child: Text(events[index],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 24)),
+                            )),
+                      ));
                 },
               ),
             )
@@ -310,9 +318,13 @@ class _ProfilePageState extends State<ProfilePage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
             child: TextField(
+              style: TextStyle(
+                fontSize: 14,
+              ),
               onChanged: (value) {},
               controller: editingController,
               decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 2),
                   labelText: "Search",
                   hintText: "Search",
                   prefixIcon: Icon(Icons.search),
@@ -442,7 +454,7 @@ class _ProfilePageState extends State<ProfilePage> {
       children: <Widget>[
         buildProfile(),
         Divider(),
-        buildImageViewButtonBar(),
+        buildViewToggleBar(),
         Divider(height: 0.0),
         buildBottomPart()
       ],

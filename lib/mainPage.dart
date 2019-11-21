@@ -49,26 +49,102 @@ class _MainPageState extends State<MainPage>
       context: context,
       builder: (BuildContext context) {
         // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Tap a S.Mesh card"),
-          content: Text(_supportsNFC
-              ? "Start Scanning"
-              : "Your device does not support NFC!"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                _stream?.cancel();
-                setState(() {
-                  _reading = false;
-                  print(_reading);
-                });
-                Navigator.of(context).pop();
-              },
+        return Dialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.0)), //this right here
+          child: Container(
+            height: 400.0,
+            width: 300.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Text(
+                    'Tap To Connect',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 0, 15, 5),
+                  child: Text(
+                    'Instructions:',
+                    style: TextStyle(color: Colors.blue[300]),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 0, 15, 0),
+                  child: Text(
+                    _supportsNFC
+                        ? '''1. Make sure NFC is turned on for your mobile 2. Approach a S.Mesh card to connect'''
+                        : 'Your device does not support NFC',
+                    style: TextStyle(color: Colors.black),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Image.asset('./assets/images/nfc.png'),
+                ),
+                //Padding(padding: EdgeInsets.only(top: 50.0)),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: RaisedButton(
+                      padding: const EdgeInsets.all(0.0),
+                      onPressed: () {
+                        _stream?.cancel();
+                        setState(() {
+                          _reading = false;
+                          print(_reading);
+                        });
+                        Navigator.of(context).pop();
+                      },
+                      textColor: Colors.white,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFFADD8E6),
+                              Color(0xFF42A5F5),
+                            ],
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(10.0),
+                        child: const Text('Stop Scanning',
+                            style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
-          ],
+          ),
         );
+        // return AlertDialog(
+        //   title: new Text("Tap a S.Mesh card"),
+        //   content: Text(_supportsNFC
+        //       ? "Start Scanning"
+        //       : "Your device does not support NFC!"),
+        //   actions: <Widget>[
+        //     // usually buttons at the bottom of the dialog
+        //     new FlatButton(
+        //       child: new Text("Close"),
+        //       onPressed: () {
+        //         _stream?.cancel();
+        //         setState(() {
+        //           _reading = false;
+        //           print(_reading);
+        //         });
+        //         Navigator.of(context).pop();
+        //       },
+        //     ),
+        //   ],
+        // );
       },
     );
   }

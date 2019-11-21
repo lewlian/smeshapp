@@ -116,8 +116,6 @@ class _LoginPageState extends State<LoginPage> {
             shrinkWrap: true,
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: <Widget>[
-              Text("Login",
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
               Form(
                 key: _formKey,
                 child: Column(
