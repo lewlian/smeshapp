@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './EditProfilePage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:random_color/random_color.dart';
+import './toggle_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key}) : super(key: key);
@@ -13,6 +14,13 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String _view = "networks";
   bool isSwitch = true;
+
+  void changeToggle(value) {
+    setState(() {
+      isSwitch = value;
+    });
+  }
+
   List<String> events = [
     "Hackathon",
     "Junction X",
@@ -107,16 +115,19 @@ class _ProfilePageState extends State<ProfilePage> {
       }));
     }
 
-    Switch buildProfileToggle() {
-      return Switch(
-          onChanged: (value) {
-            setState(() {
-              isSwitch = value;
-            });
-          },
-          activeTrackColor: Colors.lightBlueAccent,
-          activeColor: Colors.blue,
-          value: isSwitch);
+    Widget buildProfileToggle() {
+      return Container(
+        height: 30,
+        child: ToggleWidget(
+          activeBgColor: Colors.white,
+          activeTextColor: Colors.black,
+          inactiveBgColor: Colors.grey[400],
+          inactiveTextColor: Colors.black,
+          labels: ['Social', 'Biz'],
+          initialLabel: 1,
+          onToggle: (index) {},
+        ),
+      );
     }
 
     Container buildFollowButton(
@@ -143,7 +154,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 80,
                   height: 27.0,
                 )),
-            buildProfileToggle()
           ],
         ),
       );
@@ -296,20 +306,25 @@ class _ProfilePageState extends State<ProfilePage> {
 
     Padding buildProfile() {
       return Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: CircleAvatar(
-                      radius: 40.0,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(
-                          'https://epd.sutd.edu.sg/files/epdfaculty-luo-jianxi.jpg',
-                          scale: 1),
-                    ),
+                  Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                        child: CircleAvatar(
+                          radius: 40.0,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: NetworkImage(
+                              'https://epd.sutd.edu.sg/files/epdfaculty-luo-jianxi.jpg',
+                              scale: 1),
+                        ),
+                      ),
+                      buildProfileFollowButton(),
+                    ],
                   ),
                   Expanded(
                     flex: 1,
@@ -319,9 +334,20 @@ class _ProfilePageState extends State<ProfilePage> {
                         Container(
                             alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.only(top: 15.0, left: 15),
-                            child: Text(
-                              "Jian Xi",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Jian Xi",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                Text(
+                                  "Entrepreneur/Investor",
+                                  style: TextStyle(color: Colors.grey),
+                                )
+                              ],
                             )),
                         Container(
                           alignment: Alignment.centerLeft,
@@ -345,9 +371,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  buildProfileFollowButton(),
+                  buildProfileToggle(),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
