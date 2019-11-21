@@ -14,6 +14,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String _view = "networks";
   bool isSwitch = true;
+  TextEditingController editingController = TextEditingController();
 
   void changeToggle(value) {
     setState(() {
@@ -119,7 +120,8 @@ class _ProfilePageState extends State<ProfilePage> {
       return Container(
         height: 30,
         child: ToggleWidget(
-          activeBgColor: Colors.white,
+          cornerRadius: 30,
+          activeBgColor: Colors.blue[200],
           activeTextColor: Colors.black,
           inactiveBgColor: Colors.grey[400],
           inactiveTextColor: Colors.black,
@@ -297,16 +299,35 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     Widget buildBottomPart() {
+      Widget child;
       if (_view == "networks") {
-        return buildNetworks();
+        child = buildNetworks();
       } else if (_view == "events") {
-        return buildEvents();
+        child = buildEvents();
       }
+      return Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
+            child: TextField(
+              onChanged: (value) {},
+              controller: editingController,
+              decoration: InputDecoration(
+                  labelText: "Search",
+                  hintText: "Search",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+            ),
+          ),
+          child
+        ],
+      );
     }
 
     Padding buildProfile() {
       return Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.fromLTRB(8.0, 0, 8, 8),
           child: Column(
             children: <Widget>[
               Row(
@@ -352,9 +373,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 1.0, left: 15),
-                          child: Text("Hi I like to teach Entrepreneurship!"),
+                          child: Text(
+                              "Hi I teach Entrepreneurship in SUTD and I am always looking out for the next big opportunity!"),
                         ),
-                        Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+                        Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                         Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -367,6 +389,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   )
                 ],
               ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 4)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
