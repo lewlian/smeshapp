@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import './mainPage.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -192,7 +193,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18)),
                           ),
-                          RaisedButton(child: Text('Bypass'), onPressed: () {})
+                          RaisedButton(
+                              child: Text('Bypass'),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainPage()));
+                              })
                         ],
                       )
                     ],
