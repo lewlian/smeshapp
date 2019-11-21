@@ -386,7 +386,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 1.0, left: 15),
                           child: Text(
-                              "Hi I teach Entrepreneurship in SUTD and I am always looking out for the next big opportunity!"),
+                              "Hi, I teach Entrepreneurship in SUTD and I am always looking out for the next big opportunity!"),
                         ),
                         Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                         Row(
