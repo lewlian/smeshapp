@@ -1,6 +1,12 @@
 # smeshapp
 
-A new Flutter project.
+Flutter project built for the purpose of SUTD 30.111 Entrepreneurship module.
+
+My group worked on an idea to improve networking methods by making use of NFC technology embedded in digital business cards, also striving to help individuals capture more value and meaning from their networking. On top of that, we want to make social/professional events easy to find and easy to register for anyone starting out their networking journey.
+
+Our website: [Official Smesh Website](smesh.me)
+
+UIs built on Adobe XD will be shown once uploaded.
 
 ## Getting Started
 
