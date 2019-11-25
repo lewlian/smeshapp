@@ -34,23 +34,26 @@ class _ProfilePageState extends State<ProfilePage> {
   ];
 
   List<Events> recentEvents = [
-    Events("Event A", "test"),
-    Events("Event B", "test"),
-    Events("Event C", "test"),
-    Events("Event D", "test"),
-    Events("Event E", "test"),
-    Events("Event F", "test")
+    Events("Event A", "assets/images/event_pics/bg-7.png"),
+    Events("Event B", "assets/images/event_pics/bg-2.png"),
+    Events("Event C", "assets/images/event_pics/bg-3.png"),
+    Events("Event D", "assets/images/event_pics/bg-4.png"),
+    Events("Event E", "assets/images/event_pics/bg-5.png"),
+    Events("Event F", "assets/images/event_pics/bg-6.png")
   ];
 
   List<Contacts> contacts = [
-    Contacts("James", "Software Developer"),
-    Contacts("Allison", "Frontend Designer"),
-    Contacts("Dickson", "Business"),
-    Contacts("Jane", "AI Specialist"),
-    Contacts("David", "Cloud Specialist"),
-    Contacts("Emerson", "Public Speaker"),
-    Contacts("Jack Ma", "Rich Man"),
-    Contacts("Elon Musk", "Crazy Man"),
+    Contacts("Jack Ma", "Rich Man", "assets/images/contact_pics/jackma.jpg"),
+    Contacts(
+        "Elon Musk", "Crazy Man", "assets/images/contact_pics/elonmusk.jpg"),
+    Contacts("James", "Software Developer",
+        "assets/images/contact_pics/asianman1.png"),
+    Contacts(
+        "Allison", "Frontend Designer", "assets/images/contact_pics/girl1.jpg"),
+    Contacts("Dickson", "Business", "assets/images/contact_pics/man1.jpeg"),
+    Contacts("Jane", "AI Specialist", "assets/images/contact_pics/girl3.jpg"),
+    Contacts("David", "Cloud Specialist",
+        "assets/images/contact_pics/whiteman.jpeg"),
   ];
 
   @override
@@ -215,17 +218,21 @@ class _ProfilePageState extends State<ProfilePage> {
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             padding: EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(color: r.randomColor(), boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5.0,
-              ),
-            ]),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(list[i].bgImgPath), fit: BoxFit.cover),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 5.0,
+                  ),
+                ]),
             child: Text(
               recentEvents[i].eventName,
               style: TextStyle(
-                fontSize: 24,
-              ),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
               textAlign: TextAlign.center,
             ),
           ),
@@ -280,27 +287,31 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     }
 
-    Padding Contact(int index, RandomColor r) {
+    Padding Contact(int index) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-            leading: CircleAvatar(
-                backgroundColor: r.randomColor(),
-                radius: 35,
-                child: Text('${contacts[index].name[0]}')),
-            title: Text(contacts[index].name),
-            subtitle: Text(contacts[index].tag)),
+        padding: const EdgeInsets.all(4.0),
+        child: Column(
+          children: <Widget>[
+            ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage(contacts[index].imagePath),
+                  radius: 30,
+                ),
+                title: Text(contacts[index].name),
+                subtitle: Text(contacts[index].tag)),
+            Divider()
+          ],
+        ),
       );
     }
 
     Widget buildNetworks() {
-      RandomColor _randomColor = RandomColor();
       return Container(
         height: 400,
         child: ListView.builder(
           itemCount: contacts.length,
           itemBuilder: (BuildContext context, int index) {
-            return Contact(index, _randomColor);
+            return Contact(index);
           },
         ),
       );
@@ -465,8 +476,9 @@ class _ProfilePageState extends State<ProfilePage> {
 class Contacts {
   final String name;
   final String tag;
+  final String imagePath;
 
-  Contacts(this.name, this.tag);
+  Contacts(this.name, this.tag, this.imagePath);
 }
 
 class Events {
