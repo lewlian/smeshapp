@@ -30,7 +30,6 @@ class _ProfilePageState extends State<ProfilePage> {
     "Career Fair",
     "Create For Good",
     "Flutter Meetup",
-    "DBS Hax",
   ];
 
   List<Events> recentEvents = [
@@ -210,7 +209,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
     List<Widget> getEventsList(List<Events> list) {
       List<Widget> childs = [];
-      RandomColor r = RandomColor();
 
       for (var i = 0; i < list.length; i++) {
         childs.add(
@@ -219,6 +217,7 @@ class _ProfilePageState extends State<ProfilePage> {
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
             padding: EdgeInsets.symmetric(vertical: 20),
             decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
                     image: AssetImage(list[i].bgImgPath), fit: BoxFit.cover),
                 boxShadow: [
@@ -263,22 +262,28 @@ class _ProfilePageState extends State<ProfilePage> {
                 shrinkWrap: true,
                 itemCount: events.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
+                  return Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Container(
                       height: 100,
-                      child: GestureDetector(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) => EventDialog());
-                        },
-                        child: Card(
-                            color: r.randomColor(),
-                            child: Center(
-                              child: Text(events[index],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 24)),
-                            )),
-                      ));
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(recentEvents[index].bgImgPath),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                      child: Center(
+                          child: Text(events[index].toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Colors.white))),
+                    ),
+                  );
                 },
               ),
             )
