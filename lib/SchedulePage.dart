@@ -1,6 +1,7 @@
 import 'package:calendarro/date_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:calendarro/calendarro.dart';
+import './Profile.dart';
 
 class SchedulePage extends StatefulWidget {
   SchedulePage({Key key}) : super(key: key);
@@ -11,6 +12,15 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   DateTime _selectedDate = DateTime.now();
+
+  List<Events> scheduleEvents = [
+    Events("Event A", "assets/images/event_pics/bg-7.png"),
+    Events("Event B", "assets/images/event_pics/bg-2.png"),
+    Events("Event C", "assets/images/event_pics/bg-3.png"),
+    Events("Event D", "assets/images/event_pics/bg-4.png"),
+    Events("Event E", "assets/images/event_pics/bg-5.png"),
+    Events("Event F", "assets/images/event_pics/bg-6.png")
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,25 +59,32 @@ class _SchedulePageState extends State<SchedulePage> {
             child: Container(
               padding: EdgeInsets.all(8),
               child: ListView.builder(
-                itemCount: 10,
+                shrinkWrap: true,
+                itemCount: scheduleEvents.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width - 50,
+                  return Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Container(
                       height: 100,
-                      child: Card(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("Event " + index.toString(),
-                              textAlign: TextAlign.left,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: AssetImage(scheduleEvents[index].bgImgPath),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                      child: Center(
+                          child: Text(
+                              scheduleEvents[index].eventName.toString(),
                               style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                          Text("Details of event will be here..")
-                        ],
-                      )));
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Colors.white))),
+                    ),
+                  );
                 },
               ),
             ),

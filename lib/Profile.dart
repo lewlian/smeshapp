@@ -4,6 +4,7 @@ import './EditProfilePage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:random_color/random_color.dart';
 import './toggle_widget.dart';
+import './profileDialog.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key}) : super(key: key);
@@ -36,17 +37,20 @@ class _ProfilePageState extends State<ProfilePage> {
   ];
 
   List<Contacts> contacts = [
-    Contacts("Jack Ma", "Rich Man", "assets/images/contact_pics/jackma.jpg"),
-    Contacts(
-        "Elon Musk", "Crazy Man", "assets/images/contact_pics/elonmusk.jpg"),
+    Contacts("Jack Ma", "Rich Man", "assets/images/contact_pics/jackma.jpg",
+        "19/11/19"),
+    Contacts("Elon Musk", "Crazy Man",
+        "assets/images/contact_pics/elonmusk.jpg", "24/07/19"),
     Contacts("James", "Software Developer",
-        "assets/images/contact_pics/asianman1.png"),
-    Contacts(
-        "Allison", "Frontend Designer", "assets/images/contact_pics/girl1.jpg"),
-    Contacts("Dickson", "Business", "assets/images/contact_pics/man1.jpeg"),
-    Contacts("Jane", "AI Specialist", "assets/images/contact_pics/girl3.jpg"),
+        "assets/images/contact_pics/asianman1.png", "24/11/19"),
+    Contacts("Allison", "Frontend Designer",
+        "assets/images/contact_pics/girl1.jpg", "27/04/19"),
+    Contacts("Dickson", "Business", "assets/images/contact_pics/man1.jpeg",
+        "11/10/19"),
+    Contacts("Jane", "AI Specialist", "assets/images/contact_pics/girl3.jpg",
+        "02/03/19"),
     Contacts("David", "Cloud Specialist",
-        "assets/images/contact_pics/whiteman.jpeg"),
+        "assets/images/contact_pics/whiteman.jpeg", "13/01/19"),
   ];
 
   @override
@@ -211,27 +215,34 @@ class _ProfilePageState extends State<ProfilePage> {
 
       for (var i = 0; i < list.length; i++) {
         childs.add(
-          Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-            padding: EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                    image: AssetImage(list[i].bgImgPath), fit: BoxFit.cover),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                  ),
-                ]),
-            child: Text(
-              recentEvents[i].eventName,
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-              textAlign: TextAlign.center,
+          InkWell(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => EventDialog());
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              padding: EdgeInsets.symmetric(vertical: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                      image: AssetImage(list[i].bgImgPath), fit: BoxFit.cover),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5.0,
+                    ),
+                  ]),
+              child: Text(
+                recentEvents[i].eventName,
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         );
@@ -265,22 +276,29 @@ class _ProfilePageState extends State<ProfilePage> {
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                          image: AssetImage(recentEvents[index].bgImgPath),
-                          fit: BoxFit.fitWidth,
-                          alignment: Alignment.topCenter,
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => EventDialog());
+                      },
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                            image: AssetImage(recentEvents[index].bgImgPath),
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                          ),
                         ),
+                        child: Center(
+                            child: Text(events[index].toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    color: Colors.white))),
                       ),
-                      child: Center(
-                          child: Text(events[index].toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24,
-                                  color: Colors.white))),
                     ),
                   );
                 },
@@ -297,6 +315,17 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           children: <Widget>[
             ListTile(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => ProfileDialog(
+                          title: contacts[index].name,
+                          connectedDate: contacts[index].connectedDate,
+                          description:
+                              "Meaningful interactions will be logged here... ",
+                          buttonText: "Close",
+                          profileImagePath: contacts[index].imagePath));
+                },
                 leading: CircleAvatar(
                   backgroundImage: AssetImage(contacts[index].imagePath),
                   radius: 30,
@@ -493,8 +522,9 @@ class Contacts {
   final String name;
   final String tag;
   final String imagePath;
+  final String connectedDate;
 
-  Contacts(this.name, this.tag, this.imagePath);
+  Contacts(this.name, this.tag, this.imagePath, this.connectedDate);
 }
 
 class Events {
