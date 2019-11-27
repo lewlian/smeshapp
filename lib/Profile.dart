@@ -14,14 +14,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String _view = "networks";
-  bool isSwitch = true;
+  int isSwitch = 0;
   TextEditingController editingController = TextEditingController();
-
-  void changeToggle(value) {
-    setState(() {
-      isSwitch = value;
-    });
-  }
 
   List<String> events = [
     "Hackathon",
@@ -129,8 +123,13 @@ class _ProfilePageState extends State<ProfilePage> {
           inactiveBgColor: Colors.grey[400],
           inactiveTextColor: Colors.black,
           labels: ['Social', 'Biz'],
-          initialLabel: 1,
-          onToggle: (index) {},
+          initialLabel: isSwitch,
+          onToggle: (index) {
+            setState(() {
+              isSwitch = index;
+              print(isSwitch);
+            });
+          },
         ),
       );
     }
@@ -353,6 +352,50 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     }
 
+    Widget buildSocialMedia() {
+      List<String> iconPath;
+      if (isSwitch == 0) {
+        iconPath = [
+          'assets/images/facebook.png',
+          'assets/images/twitter.png',
+          'assets/images/whatsapp.png',
+          'assets/images/linkedin.png',
+          'assets/images/instagram.png'
+        ];
+      } else {
+        iconPath = [
+          'assets/images/facebook_un.png',
+          'assets/images/twitter_un.png',
+          'assets/images/whatsapp.png',
+          'assets/images/linkedin.png',
+          'assets/images/instagram_un.png'
+        ];
+      }
+
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+            child: Image.asset(iconPath[0], scale: 6),
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+              child: Image.asset(iconPath[1], scale: 6)),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+              child: Image.asset(iconPath[2], scale: 6)),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+              child: Image.asset(iconPath[3], scale: 6)),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+            child: Image.asset(iconPath[4], scale: 6),
+          ),
+        ],
+      );
+    }
+
     Padding buildProfile() {
       return Padding(
           padding: EdgeInsets.fromLTRB(8.0, 0, 8, 8),
@@ -424,40 +467,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: <Widget>[
                   buildProfileToggle(),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 4),
-                          child: Image.asset('assets/images/facebook.png',
-                              scale: 6),
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 4),
-                            child: Image.asset('assets/images/twitter.png',
-                                scale: 6)),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 4),
-                            child: Image.asset('assets/images/whatsapp.png',
-                                scale: 6)),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 4),
-                            child: Image.asset('assets/images/linkedin.png',
-                                scale: 6)),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 4),
-                          child: Image.asset('assets/images/instagram.png',
-                              scale: 6),
-                        ),
-                      ],
-                    ),
-                  )
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: buildSocialMedia())
                 ],
               ),
             ],
