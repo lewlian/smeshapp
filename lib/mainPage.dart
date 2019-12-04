@@ -80,7 +80,8 @@ class _MainPageState extends State<MainPage>
                   padding: EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                   child: Text(
                     _supportsNFC
-                        ? '''1. Make sure NFC is turned on for your mobile 2. Approach a S.Mesh card to connect'''
+                        ? "1. Make sure NFC is turned on for your mobile\n\n"
+                            "2. Approach a S.Mesh card to connect"
                         : 'Your device does not support NFC',
                     style: TextStyle(color: Colors.black),
                     textAlign: TextAlign.left,
@@ -152,6 +153,7 @@ class _MainPageState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'smesh',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(

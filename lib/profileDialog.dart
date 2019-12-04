@@ -84,8 +84,8 @@ class ProfileDialog extends StatelessWidget {
         ),
         //...top circlular image part,
         Positioned(
-          left: 120,
-          right: 120,
+          left: 90,
+          right: 90,
           child: CircleAvatar(
             backgroundImage: AssetImage(profileImagePath),
             backgroundColor: Colors.blueAccent,

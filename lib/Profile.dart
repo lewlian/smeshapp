@@ -121,6 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
       return Container(
         height: 30,
         child: ToggleWidget(
+          minWidth: 50,
           cornerRadius: 30,
           activeBgColor: Colors.blue[200],
           activeTextColor: Colors.black,
@@ -439,9 +440,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: CircleAvatar(
                           radius: 40.0,
                           backgroundColor: Colors.transparent,
-                          backgroundImage: NetworkImage(
-                              'https://epd.sutd.edu.sg/files/epdfaculty-luo-jianxi.jpg',
-                              scale: 1),
+                          backgroundImage: AssetImage(
+                              'assets/images/investorProfile/HaiLiu.jpeg'),
                         ),
                       ),
                       buildProfileFollowButton(),
@@ -459,7 +459,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Jian Xi",
+                                  "Yang Yang",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -474,7 +474,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 1.0, left: 15),
                           child: Text(
-                              "Hi, I teach Entrepreneurship in SUTD and I am always looking out for the next big opportunity!"),
+                              "Early stage venture capital always looking for passionate entrepreneurs who want to change the world. "),
                         ),
                         Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                         Row(
