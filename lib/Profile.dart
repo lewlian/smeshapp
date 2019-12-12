@@ -405,6 +405,8 @@ class _ProfilePageState extends State<ProfilePage> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          Padding(            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 17),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
             child: Image.asset(iconPath[0], scale: 6),
@@ -441,7 +443,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           radius: 40.0,
                           backgroundColor: Colors.transparent,
                           backgroundImage: AssetImage(
-                              'assets/images/investorProfile/HaiLiu.jpeg'),
+                              'assets/images/investorProfile/AlexNg.png'),
                         ),
                       ),
                       buildProfileFollowButton(),
@@ -459,13 +461,13 @@ class _ProfilePageState extends State<ProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Yang Yang",
+                                  "Alex Ngq",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
                                 Text(
-                                  "Entrepreneur/Investor",
+                                  "Entrepreneur-Venture Capital-Startups",
                                   style: TextStyle(color: Colors.grey),
                                 )
                               ],
@@ -474,7 +476,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(top: 1.0, left: 15),
                           child: Text(
-                              "Early stage venture capital always looking for passionate entrepreneurs who want to change the world. "),
+                              "Managing Director of Spaze Ventures, leading investments and helping entrepreneurs launch and grow their startup."),
                         ),
                         Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                         Row(

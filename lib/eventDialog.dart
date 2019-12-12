@@ -9,7 +9,7 @@ class EventDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0)), //this right here
       child: Container(
-        height: 300.0,
+        height: 350.0,
         width: 300.0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
